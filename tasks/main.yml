@@ -1,2 +1,19 @@
 ---
 # tasks file for oh_my_zsh
+- name: Install Git
+  become: yes
+  ansible.builtin.package:
+    state: present
+    name: git
+
+- name: Install ZSH
+  become: yes
+  ansible.builtin.package:
+    name: zsh
+    state: present
+
+- name: Install Powerline fonts
+  become: yes
+  ansible.builtin.package:
+    state: present
+    name: powerline-fonts

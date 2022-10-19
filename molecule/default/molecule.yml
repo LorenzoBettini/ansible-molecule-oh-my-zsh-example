@@ -5,7 +5,7 @@ driver:
   name: docker
 platforms:
   - name: instance
-    image: quay.io/centos/centos:stream8
+    image: fedora:36
     pre_build_image: true
 provisioner:
   name: ansible

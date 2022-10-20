@@ -11,6 +11,12 @@ jobs:
   test:
     name: Molecule
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        playbookdistro:
+          - fedora:36
+          - archlinux:latest
 
     steps:
       - name: Check out the codebase.
@@ -29,3 +35,4 @@ jobs:
         env:
           PY_COLORS: '1'
           ANSIBLE_FORCE_COLOR: '1'
+          MOLECULE_DISTRO: ${{ matrix.playbookdistro }}

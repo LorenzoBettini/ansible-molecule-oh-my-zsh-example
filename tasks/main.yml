@@ -18,6 +18,12 @@
     state: present
     name: powerline-fonts
 
+- name: Install Oh My Zsh
+  ansible.builtin.git:
+    repo: https://github.com/ohmyzsh/ohmyzsh.git
+    dest: ~/.oh-my-zsh
+    depth: 1
+
 - name: Change user shell to zsh 
   become: yes
   ansible.builtin.user:

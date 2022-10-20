@@ -2,6 +2,7 @@
 - name: Prepare
   hosts: all
   gather_facts: false
+  package_facts: true
   tasks:
     - name: Install python
       ansible.builtin.package:

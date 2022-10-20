@@ -9,5 +9,7 @@ platforms:
     pre_build_image: true
 provisioner:
   name: ansible
+  playbooks:
+    prepare: prepare.yml
 verifier:
   name: ansible

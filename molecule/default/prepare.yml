@@ -1,0 +1,8 @@
+---
+- name: Prepare
+  hosts: all
+  tasks:
+    - name: Install python
+      ansible.builtin.package:
+        state: present
+        name: python

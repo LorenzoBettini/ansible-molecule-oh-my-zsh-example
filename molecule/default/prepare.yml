@@ -3,10 +3,6 @@
   hosts: all
   gather_facts: false
   tasks:
-    - name: Environment MOLECULE_DISTRO
-      ansible.builtin.debug:
-        msg: "'{{ lookup('ansible.builtin.env', 'MOLECULE_DISTRO') }}'"
-
     - name: Install python in Arch
       ansible.builtin.raw: pacman -Sy --noconfirm --needed python sudo
       when: "'arch' is in lookup('ansible.builtin.env', 'MOLECULE_DISTRO')"

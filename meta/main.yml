@@ -1,8 +1,9 @@
 galaxy_info:
-  author: your name
+  role_name: oh_my_zsh
+  author: Lorenzo Bettini
   namespace: lorenzobettini
-  description: your role description
-  company: your company (optional)
+  description: An Ansible/Molecule example for installing Oh My Zsh
+  company: Lorenzo Bettini
 
   # If the issue tracker for your role is not on github, uncomment the
   # next line and provide a value

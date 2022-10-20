@@ -3,8 +3,13 @@
 
 - name: Verify
   hosts: all
-  gather_facts: false
+  gather_facts: true
   tasks:
-  - name: Example assertion
+  - name: Get current user's shell
+    ansible.builtin.shell: >
+      grep -E "^{{ ansible_user_id }}:" /etc/passwd | awk -F: '{ print $7 }'
+    register: user_shell
+
+  - name: Assert shell is zsh
     ansible.builtin.assert:
-      that: true
+      that: "user_shell.stdout == '/bin/zsh'"

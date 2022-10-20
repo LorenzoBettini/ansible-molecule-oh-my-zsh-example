@@ -29,25 +29,3 @@ jobs:
         env:
           PY_COLORS: '1'
           ANSIBLE_FORCE_COLOR: '1'
-
-  run_local:
-    name: Run the playbook
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Check out the codebase.
-        uses: actions/checkout@v2
-
-      - name: Set up Python 3.
-        uses: actions/setup-python@v2
-        with:
-          python-version: '3.x'
-
-      - name: Install dependencies.
-        run: pip3 install ansible
-
-      - name: Run the playbook
-        run: ansible-playbook -i tests/inventory tests/test.yml -v
-        env:
-          PY_COLORS: '1'
-          ANSIBLE_FORCE_COLOR: '1'

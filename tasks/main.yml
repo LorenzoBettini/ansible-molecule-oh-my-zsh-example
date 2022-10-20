@@ -24,6 +24,12 @@
     dest: ~/.oh-my-zsh
     depth: 1
 
+- name: Copy zshrc
+  ansible.builtin.copy:
+    src: zshrc
+    dest: ~/.zshrc
+    mode: 0644
+
 - name: Change user shell to zsh 
   become: yes
   ansible.builtin.user:

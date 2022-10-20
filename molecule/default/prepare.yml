@@ -4,4 +4,4 @@
   gather_facts: false
   tasks:
     - name: Install python
-      ansible.builtin.raw: pacman -Sy python
+      ansible.builtin.raw: pacman -Sy --noconfirm --needed python

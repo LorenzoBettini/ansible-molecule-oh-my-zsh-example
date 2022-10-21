@@ -6,3 +6,7 @@
     - name: Install python in Arch
       ansible.builtin.raw: pacman -Sy --noconfirm --needed python sudo
       when: "'arch' is in lookup('ansible.builtin.env', 'MOLECULE_DISTRO')"
+
+    - name: Install python in Ubuntu
+      ansible.builtin.raw: apt-get install -y --no-install-recommends python3 sudo
+      when: "'ubuntu' is in lookup('ansible.builtin.env', 'MOLECULE_DISTRO')"

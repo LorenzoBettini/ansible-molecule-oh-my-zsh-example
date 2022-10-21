@@ -30,10 +30,10 @@ jobs:
           cache: 'pip'
 
       - name: Cache pip installed packages
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: |
-            /opt/hostedtoolcache/Python/*
+            /opt/hostedtoolcache/Python/*/x64/lib/
           key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
           # make sure that when an exact cache is not found we start from scratch
 

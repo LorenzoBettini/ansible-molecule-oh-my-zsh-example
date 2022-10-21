@@ -46,3 +46,33 @@ jobs:
           PY_COLORS: '1'
           ANSIBLE_FORCE_COLOR: '1'
           MOLECULE_DISTRO: ${{ matrix.playbookdistro }}
+
+  local-run:
+    name: Run Playbook on the host
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out the codebase.
+        uses: actions/checkout@v2
+
+      - name: Set up Python 3.
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+          cache: 'pip'
+
+      - name: Cache pip installed packages
+        uses: actions/cache@v3
+        with:
+          path: |
+            /opt/hostedtoolcache/Python/*
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+
+      - name: Install test dependencies.
+        run: pip install -r pip/requirements.txt
+
+      - name: Run the playbook on the runner.
+        run: ansible-playbook tests/test.yml -i tests/inventory
+        env:
+          PY_COLORS: '1'
+          ANSIBLE_FORCE_COLOR: '1'

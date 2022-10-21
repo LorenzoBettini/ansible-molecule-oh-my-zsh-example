@@ -12,11 +12,19 @@
     name: zsh
     state: present
 
-- name: Install Powerline fonts
+- name: Install Powerline fonts in Debian
+  become: yes
+  ansible.builtin.package:
+    state: present
+    name: fonts-powerline
+  when: ansible_os_family == 'Debian'
+
+- name: Install Powerline fonts in other distros
   become: yes
   ansible.builtin.package:
     state: present
     name: powerline-fonts
+  when: ansible_os_family != 'Debian'
 
 - name: Install Oh My Zsh
   ansible.builtin.git:

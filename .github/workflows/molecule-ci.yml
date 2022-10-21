@@ -30,7 +30,7 @@ jobs:
           cache: 'pip'
 
       - name: Install test dependencies.
-        run: pip install -r requirements.txt
+        run: pip install -r pip/requirements.txt
 
       - name: Show pip installed packages.
         run: pip list -v

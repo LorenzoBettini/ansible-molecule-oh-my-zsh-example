@@ -35,6 +35,9 @@ jobs:
       - name: Show pip installed packages.
         run: pip list -v
 
+      - name: Show home.
+        run: echo $HOME
+
       - name: Run Molecule tests.
         run: molecule test
         env:

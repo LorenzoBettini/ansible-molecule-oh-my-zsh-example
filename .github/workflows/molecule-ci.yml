@@ -38,6 +38,9 @@ jobs:
       - name: Show home.
         run: echo $HOME
 
+      - name: List home.
+        run: ls -al $HOME
+
       - name: Run Molecule tests.
         run: molecule test
         env:

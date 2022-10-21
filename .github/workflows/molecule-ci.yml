@@ -33,7 +33,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: |
-            /opt/hostedtoolcache/Python/*/x64/lib/
+            /opt/hostedtoolcache/Python/*
           key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}-${{ matrix.playbookdistro }}
           restore-keys: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}-
 

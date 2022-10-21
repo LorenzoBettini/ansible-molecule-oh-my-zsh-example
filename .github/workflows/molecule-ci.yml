@@ -34,8 +34,8 @@ jobs:
         with:
           path: |
             /opt/hostedtoolcache/Python/*/x64/lib/
-          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
-          # make sure that when an exact cache is not found we start from scratch
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}-${{ matrix.playbookdistro }}
+          restore-keys: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}-
 
       - name: Install test dependencies.
         run: pip install -r pip/requirements.txt

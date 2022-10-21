@@ -83,6 +83,9 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
+# Make sure $HOME/.local/bin is in the PATH
+export PATH=$HOME/.local/bin:$PATH
+
 export _JAVA_OPTIONS=-Djava.net.preferIPv4Stack=true
 
 # export MANPATH="/usr/local/man:$MANPATH"

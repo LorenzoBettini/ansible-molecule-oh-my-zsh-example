@@ -29,17 +29,16 @@ jobs:
           python-version: '3.x'
           cache: 'pip'
 
+      - name: Cache pip installed packages
+        uses: actions/cache@v2
+        with:
+          path: |
+            /opt/hostedtoolcache/Python/*
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+          # make sure that when an exact cache is not found we start from scratch
+
       - name: Install test dependencies.
         run: pip install -r pip/requirements.txt
-
-      - name: Show pip installed packages.
-        run: pip list -v
-
-      - name: Show home.
-        run: echo $HOME
-
-      - name: List home.
-        run: ls -al $HOME
 
       - name: Run Molecule tests.
         run: molecule test

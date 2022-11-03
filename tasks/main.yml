@@ -23,6 +23,13 @@
     state: present
     name: "{{ powerlinefonts }}"
 
+# required by the OMZ plugin zsh-interactive-cd
+- name: Install fzf (command-line fuzzy finder)
+  become: yes
+  ansible.builtin.package:
+    state: present
+    name: fzf
+
 - name: Install Oh My Zsh
   ansible.builtin.git:
     repo: https://github.com/ohmyzsh/ohmyzsh.git

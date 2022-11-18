@@ -49,6 +49,7 @@
     url: https://starship.rs/install.sh
     dest: /tmp/starship_install.sh
     mode: '0755'
+  register: starship_installation_script
   when: ansible_os_family == 'Debian'
 
 - name: Install starship with installation script
@@ -56,7 +57,10 @@
   ansible.builtin.shell:
     cmd: /tmp/starship_install.sh --yes
     executable: /bin/sh
-  when: ansible_os_family == 'Debian'
+  when: ansible_os_family == 'Debian' and starship_installation_script.changed
+# if the previous task hasn't changed, the shell script is already there
+# and we have already installed starship
+# we check this to satisfy idempotence
 
 - name: Install Oh My Zsh
   ansible.builtin.git:

@@ -32,6 +32,15 @@ License
 
 BSD
 
+Notes
+-------
+
+To quickly check `converge` passing a variable:
+
+```
+molecule converge -- --extra-vars='with_starship=false'
+```
+
 Author Information
 ------------------
 

@@ -35,14 +35,14 @@
   ansible.builtin.package:
     state: present
     name: starship
-  when: ansible_os_family != 'Debian'
+  when: ansible_os_family != 'Debian' and with_starship == true
 
 - name: Install curl (for starship installation)
   become: true
   ansible.builtin.package:
     state: present
     name: curl
-  when: ansible_os_family == 'Debian'
+  when: ansible_os_family == 'Debian' and with_starship == true
 
 - name: Get starship install script
   ansible.builtin.get_url:
@@ -50,7 +50,7 @@
     dest: /tmp/starship_install.sh
     mode: '0755'
   register: starship_installation_script
-  when: ansible_os_family == 'Debian'
+  when: ansible_os_family == 'Debian' and with_starship == true
 
 - name: Install starship with installation script
   become: true
@@ -97,12 +97,21 @@
     src: zshrc-starship
     dest: ~/.zshrc
     mode: 0644
+  when: with_starship == true
+
+- name: Copy zshrc (for p10k)
+  ansible.builtin.copy:
+    src: zshrc-p10k
+    dest: ~/.zshrc
+    mode: 0644
+  when: with_starship != true
 
 - name: Copy p10k.zsh
   ansible.builtin.copy:
     src: p10k.zsh
     dest: ~/.p10k.zsh
     mode: 0644
+  when: with_starship != true
 
 - name: Change user shell to zsh 
   become: true

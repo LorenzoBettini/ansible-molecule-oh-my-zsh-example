@@ -9,7 +9,7 @@ name: Molecule CI
 jobs:
 
   test:
-    name: Molecule
+    name: Molecule default scenario
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -46,6 +46,37 @@ jobs:
           PY_COLORS: '1'
           ANSIBLE_FORCE_COLOR: '1'
           MOLECULE_DISTRO: ${{ matrix.playbookdistro }}
+
+  test-p10k:
+    name: Molecule p10k scenario
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out the codebase.
+        uses: actions/checkout@v2
+
+      - name: Set up Python 3.
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+          cache: 'pip'
+
+      - name: Cache pip installed packages
+        uses: actions/cache@v3
+        with:
+          path: |
+            /opt/hostedtoolcache/Python/*
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}-${{ matrix.playbookdistro }}
+          restore-keys: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}-
+
+      - name: Install test dependencies.
+        run: pip install -r pip/requirements.txt
+
+      - name: Run Molecule tests (p10k scenario).
+        run: molecule test --scenario-name='p10k-scenario'
+        env:
+          PY_COLORS: '1'
+          ANSIBLE_FORCE_COLOR: '1'
 
   local-run:
     name: Run Playbook on the host

@@ -88,9 +88,9 @@
     dest: ~/.oh-my-zsh/custom/themes/powerlevel10k
     depth: 1
 
-- name: Copy zshrc
+- name: Copy zshrc (for starship)
   ansible.builtin.copy:
-    src: zshrc
+    src: zshrc-starship
     dest: ~/.zshrc
     mode: 0644
 

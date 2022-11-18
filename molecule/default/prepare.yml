@@ -5,7 +5,8 @@
   tasks:
     - name: Install python in Arch
       ansible.builtin.raw: pacman -Sy --noconfirm --needed python sudo
-      when: "'arch' is in lookup('ansible.builtin.env', 'MOLECULE_DISTRO')"
+      when: "lookup('ansible.builtin.env', 'MOLECULE_DISTRO') == '' or 'arch' is in lookup('ansible.builtin.env', 'MOLECULE_DISTRO')"
+    # we switched to Arch by default, so MOLECULE_DISTRO empty means Arch
 
     - name: Install python in Ubuntu
       ansible.builtin.raw: apt update && apt install -y --no-install-recommends python3 sudo

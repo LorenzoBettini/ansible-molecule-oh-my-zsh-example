@@ -30,6 +30,12 @@
     state: present
     name: fzf
 
+- name: Install starship (cross-shell prompt)
+  become: true
+  ansible.builtin.package:
+    state: present
+    name: starship
+
 - name: Install Oh My Zsh
   ansible.builtin.git:
     repo: https://github.com/ohmyzsh/ohmyzsh.git

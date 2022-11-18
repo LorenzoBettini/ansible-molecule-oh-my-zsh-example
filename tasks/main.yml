@@ -30,11 +30,33 @@
     state: present
     name: fzf
 
-- name: Install starship (cross-shell prompt)
+- name: Install starship (cross-shell prompt) as a package
   become: true
   ansible.builtin.package:
     state: present
     name: starship
+  when: ansible_os_family != 'Debian'
+
+- name: Install curl (for starship installation)
+  become: true
+  ansible.builtin.package:
+    state: present
+    name: curl
+  when: ansible_os_family == 'Debian'
+
+- name: Get starship install script
+  ansible.builtin.get_url:
+    url: https://starship.rs/install.sh
+    dest: /tmp/starship_install.sh
+    mode: '0755'
+  when: ansible_os_family == 'Debian'
+
+- name: Install starship with installation script
+  become: true
+  ansible.builtin.shell:
+    cmd: /tmp/starship_install.sh --yes
+    executable: /bin/sh
+  when: ansible_os_family == 'Debian'
 
 - name: Install Oh My Zsh
   ansible.builtin.git:

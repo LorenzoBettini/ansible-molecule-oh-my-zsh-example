@@ -13,3 +13,7 @@
   - name: Assert shell is zsh
     ansible.builtin.assert:
       that: "user_shell.stdout == '/bin/zsh'"
+
+  - name: Assert starship is installed in this scenario
+    ansible.builtin.shell: >
+      starship --version

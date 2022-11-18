@@ -1,0 +1,21 @@
+---
+# This is an example playbook to execute Ansible tests.
+
+- name: Verify
+  hosts: all
+  gather_facts: true
+  tasks:
+  - name: Get current user's shell
+    ansible.builtin.shell: >
+      grep -E "^{{ ansible_user_id }}:" /etc/passwd | awk -F: '{ print $7 }'
+    register: user_shell
+
+  - name: Assert shell is zsh
+    ansible.builtin.assert:
+      that: "user_shell.stdout == '/bin/zsh'"
+
+  - name: Assert starship is NOT installed in this scenario
+    ansible.builtin.shell: >
+      starship --version
+    register: starship_cmd
+    failed_when: starship_cmd.rc == 0

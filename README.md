@@ -32,6 +32,21 @@ License
 
 BSD
 
+Notes
+-------
+
+To quickly check `converge` passing a variable:
+
+```
+molecule converge -- --extra-vars='with_starship=false'
+```
+
+To run a different scenario:
+
+```
+molecule converge --scenario-name='p10k-scenario'
+```
+
 Author Information
 ------------------
 

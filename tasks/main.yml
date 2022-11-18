@@ -1,13 +1,13 @@
 ---
 # tasks file for oh_my_zsh
 - name: Install Git
-  become: yes
+  become: true
   ansible.builtin.package:
     state: present
     name: git
 
 - name: Install ZSH
-  become: yes
+  become: true
   ansible.builtin.package:
     name: zsh
     state: present
@@ -18,14 +18,14 @@
   when: ansible_os_family == 'Debian'
 
 - name: Install Powerline fonts
-  become: yes
+  become: true
   ansible.builtin.package:
     state: present
     name: "{{ powerlinefonts }}"
 
 # required by the OMZ plugin zsh-interactive-cd
 - name: Install fzf (command-line fuzzy finder)
-  become: yes
+  become: true
   ansible.builtin.package:
     state: present
     name: fzf
@@ -54,26 +54,16 @@
     dest: ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
     depth: 1
 
-- name: Install Powerline10k theme
-  git:
-    repo: https://github.com/romkatv/powerlevel10k.git
-    dest: ~/.oh-my-zsh/custom/themes/powerlevel10k
-    depth: 1
-
-- name: Copy zshrc
-  ansible.builtin.copy:
-    src: zshrc
-    dest: ~/.zshrc
-    mode: 0644
-
-- name: Copy p10k.zsh
-  ansible.builtin.copy:
-    src: p10k.zsh
-    dest: ~/.p10k.zsh
-    mode: 0644
-
 - name: Change user shell to zsh 
-  become: yes
+  become: true
   ansible.builtin.user:
     name: "{{ ansible_user_id }}"
     shell: /bin/zsh
+
+- name: Tasks for starship
+  ansible.builtin.include_tasks: starship.yml
+  when: with_starship == true
+
+- name: Tasks for p10k
+  ansible.builtin.include_tasks: p10k.yml
+  when: with_starship != true

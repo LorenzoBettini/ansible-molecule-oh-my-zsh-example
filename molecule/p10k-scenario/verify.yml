@@ -14,9 +14,11 @@
     ansible.builtin.assert:
       that: "user_shell.stdout == '/bin/zsh'"
 
-  - name: Assert starship is installed in this scenario
+  - name: Assert starship is NOT installed in this scenario
     ansible.builtin.shell: >
       starship --version
+    register: starship_cmd
+    failed_when: starship_cmd.rc == 0
 
   - name: Get current user's home
     ansible.builtin.shell: >
@@ -28,6 +30,6 @@
       path: "{{ user_home.stdout }}/.p10k.zsh"
     register: result
 
-  - name: Assert ~/.p10k.zsh is NOT present in this scenario
+  - name: Assert ~/.p10k.zsh is present
     ansible.builtin.assert:
-      that: "not result.stat.exists"
+      that: "result.stat.exists"

@@ -5,7 +5,7 @@ driver:
   name: docker
 platforms:
   - name: instance
-    image: ${MOLECULE_DISTRO:-fedora:36}
+    image: ${MOLECULE_DISTRO:-archlinux:latest}
     pre_build_image: true
 provisioner:
   name: ansible

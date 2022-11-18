@@ -17,3 +17,17 @@
   - name: Assert starship is installed in this scenario
     ansible.builtin.shell: >
       starship --version
+
+  - name: Get current user's home
+    ansible.builtin.shell: >
+      grep -E "^{{ ansible_user_id }}:" /etc/passwd | awk -F: '{ print $6 }'
+    register: user_home
+
+  - name: Check if ~/.p10k.zsh is present
+    ansible.builtin.stat:
+      path: "{{ user_home.stdout }}/.p10k.zsh"
+    register: result
+
+  - name: Assert ~/.p10k.zsh is NOT present in this scenario
+    ansible.builtin.assert:
+      that: "not result.stat.exists"

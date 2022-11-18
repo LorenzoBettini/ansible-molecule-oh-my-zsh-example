@@ -1,13 +1,13 @@
 ---
 # tasks file for oh_my_zsh
 - name: Install Git
-  become: yes
+  become: true
   ansible.builtin.package:
     state: present
     name: git
 
 - name: Install ZSH
-  become: yes
+  become: true
   ansible.builtin.package:
     name: zsh
     state: present
@@ -18,14 +18,14 @@
   when: ansible_os_family == 'Debian'
 
 - name: Install Powerline fonts
-  become: yes
+  become: true
   ansible.builtin.package:
     state: present
     name: "{{ powerlinefonts }}"
 
 # required by the OMZ plugin zsh-interactive-cd
 - name: Install fzf (command-line fuzzy finder)
-  become: yes
+  become: true
   ansible.builtin.package:
     state: present
     name: fzf
@@ -101,7 +101,7 @@
     mode: 0644
 
 - name: Change user shell to zsh 
-  become: yes
+  become: true
   ansible.builtin.user:
     name: "{{ ansible_user_id }}"
     shell: /bin/zsh

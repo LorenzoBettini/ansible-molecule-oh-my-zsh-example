@@ -47,6 +47,12 @@ To run a different scenario:
 molecule converge --scenario-name='p10k-scenario'
 ```
 
+To run the playbook on this system:
+
+```
+ansible-playbook tests/test.yml -i tests/inventory -K
+```
+
 Author Information
 ------------------
 

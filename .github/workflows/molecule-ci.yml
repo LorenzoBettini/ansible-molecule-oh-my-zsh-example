@@ -17,7 +17,7 @@ jobs:
         playbookdistro:
           - fedora:36
           - archlinux:latest
-          - ubuntu:jammy
+          - ubuntu:kinetic
 
     steps:
       - name: Check out the codebase.

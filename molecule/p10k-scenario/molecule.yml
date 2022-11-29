@@ -4,7 +4,7 @@ dependency:
 driver:
   name: docker
 platforms:
-  - name: instance-${MOLECULE_DISTRO:-archlinux:latest}
+  - name: instance
     image: ${MOLECULE_DISTRO:-archlinux:latest}
     pre_build_image: true
 provisioner:

@@ -15,7 +15,7 @@ jobs:
       fail-fast: false
       matrix:
         playbookdistro:
-          - fedora:36
+          - fedora:37
           - archlinux:latest
           - ubuntu:kinetic
 

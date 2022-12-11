@@ -7,6 +7,13 @@
     name: starship
   when: ansible_os_family == 'Archlinux'
 
+- name: Install Google Noto emoji fonts
+  become: true
+  ansible.builtin.package:
+    state: present
+    name: noto-fonts-emoji
+  when: ansible_os_family == 'Archlinux'
+
 - name: Install curl (for starship installation)
   become: true
   ansible.builtin.package:

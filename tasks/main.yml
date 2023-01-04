@@ -48,6 +48,20 @@
     state: link
   when: ansible_os_family == 'Debian'
 
+- name: Install bat
+  become: true
+  ansible.builtin.package:
+    state: present
+    name: bat
+
+- name: Create link bat to batcat in Debian
+  become: true
+  ansible.builtin.file:
+    src: '/usr/bin/batcat'
+    dest: '/usr/bin/bat'
+    state: link
+  when: ansible_os_family == 'Debian'
+
 # required by the OMZ plugin zsh-interactive-cd
 - name: Install fzf (command-line fuzzy finder)
   become: true

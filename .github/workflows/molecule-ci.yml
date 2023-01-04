@@ -20,10 +20,11 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        playbookdistro:
-          - fedora:37
-          - archlinux:latest
-          - ubuntu:kinetic
+        scenario:
+          - default # arch
+          - fedora
+          - ubuntu
+          - p10k-scenario
 
     steps:
       - name: Check out the codebase.
@@ -38,30 +39,7 @@ jobs:
         run: pip install -r pip/requirements.txt
 
       - name: Run Molecule tests.
-        run: molecule test
-        env:
-          PY_COLORS: '1'
-          ANSIBLE_FORCE_COLOR: '1'
-          MOLECULE_DISTRO: ${{ matrix.playbookdistro }}
-
-  test-p10k:
-    name: Molecule p10k scenario
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Check out the codebase.
-        uses: actions/checkout@v2
-
-      - name: Set up Python 3.
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.x'
-
-      - name: Install test dependencies.
-        run: pip install -r pip/requirements.txt
-
-      - name: Run Molecule tests (p10k scenario).
-        run: molecule test --scenario-name='p10k-scenario'
+        run: molecule test --scenario-name=${{ matrix.scenario }}
         env:
           PY_COLORS: '1'
           ANSIBLE_FORCE_COLOR: '1'

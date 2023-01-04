@@ -1,10 +1,16 @@
 ---
 name: Molecule CI
 on:
-  pull_request:
   push:
-    branches:
-      - master
+    paths-ignore:
+      - '**.md'
+      - '.gitpod.Dockerfile'
+      - '.gitpod.yml'
+  pull_request:
+    paths-ignore:
+      - '**.md'
+      - '.gitpod.Dockerfile'
+      - '.gitpod.yml'
 
 jobs:
 

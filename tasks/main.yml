@@ -34,6 +34,14 @@
     state: present
     name: "{{ fdfind }}"
 
+- name: Create link fd to fdfind in Debian
+  become: true
+  ansible.builtin.file:
+    src: '/usr/bin/fdfind'
+    dest: '/usr/bin/fd'
+    state: link
+  when: ansible_os_family == 'Debian'
+
 # required by the OMZ plugin zsh-interactive-cd
 - name: Install fzf (command-line fuzzy finder)
   become: true

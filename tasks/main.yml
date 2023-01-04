@@ -28,6 +28,13 @@
     state: present
     name: "{{ powerlinefonts }}"
 
+- name: Install dust on Arch
+  become: true
+  ansible.builtin.package:
+    state: present
+    name: dust
+  when: ansible_os_family == 'Archlinux'
+
 - name: Install exa
   become: true
   ansible.builtin.package:

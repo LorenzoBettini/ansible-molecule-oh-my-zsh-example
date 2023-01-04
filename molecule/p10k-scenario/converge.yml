@@ -3,7 +3,7 @@
   hosts: all
   tasks:
     - name: "Include lorenzobettini.oh_my_zsh"
-      include_role:
+      ansible.builtin.include_role:
         name: "lorenzobettini.oh_my_zsh"
       vars:
         with_starship: false

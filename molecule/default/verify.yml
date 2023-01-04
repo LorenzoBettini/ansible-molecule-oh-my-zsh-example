@@ -7,8 +7,12 @@
   tasks:
   - name: Get current user's shell
     ansible.builtin.shell: >
+      set -o pipefail && \
       grep -E "^{{ ansible_user_id }}:" /etc/passwd | awk -F: '{ print $7 }'
     register: user_shell
+    args:
+      executable: /bin/bash
+    changed_when: false
 
   - name: Assert shell is zsh
     ansible.builtin.assert:
@@ -17,11 +21,16 @@
   - name: Assert starship is installed in this scenario
     ansible.builtin.shell: >
       starship --version
+    changed_when: false
 
   - name: Get current user's home
     ansible.builtin.shell: >
+      set -o pipefail && \
       grep -E "^{{ ansible_user_id }}:" /etc/passwd | awk -F: '{ print $6 }'
     register: user_home
+    args:
+      executable: /bin/bash
+    changed_when: false
 
   - name: Check if ~/.p10k.zsh is present
     ansible.builtin.stat:

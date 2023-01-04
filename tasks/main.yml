@@ -47,9 +47,13 @@
 - name: Install dust on Ubuntu/Fedora
   become: true
   ansible.builtin.unarchive:
-    src: "https://github.com/bootandy/dust/releases/latest/download/dust-{{dustdata.json.tag_name}}-x86_64-unknown-linux-gnu.tar.gz"
+    src: "https://github.com/bootandy/dust/releases/latest/download/dust-{{ dustdata.json.tag_name }}-x86_64-unknown-linux-gnu.tar.gz"
     dest: /usr/local/bin
-    remote_src: yes
+    extra_opts:
+    - --strip=1
+    - --wildcards
+    - '*/dust'
+    remote_src: true
   when: ansible_os_family != 'Archlinux'
 
 - name: Install exa

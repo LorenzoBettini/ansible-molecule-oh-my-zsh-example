@@ -25,6 +25,13 @@
     failed_when: starship_cmd.rc == 0
     changed_when: false
 
+  # In Ubuntu we have to create a link to "fd", because
+  # the command is "fdfind", so it's better to check that
+  - name: Assert fd can be found
+    ansible.builtin.shell: >
+      fd --version
+    changed_when: false
+
   - name: Get current user's home
     ansible.builtin.shell: >
       set -o pipefail && \

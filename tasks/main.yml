@@ -62,6 +62,12 @@
     state: link
   when: ansible_os_family == 'Debian'
 
+- name: Install zoxide
+  become: true
+  ansible.builtin.package:
+    state: present
+    name: zoxide
+
 # required by the OMZ plugin zsh-interactive-cd
 - name: Install fzf (command-line fuzzy finder)
   become: true

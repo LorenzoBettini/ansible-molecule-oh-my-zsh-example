@@ -82,6 +82,7 @@ plugins=(
     zsh-interactive-cd
     zsh-navigation-tools
     fzf
+    zoxide
 )
 
 source $ZSH/oh-my-zsh.sh

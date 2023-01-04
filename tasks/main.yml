@@ -30,26 +30,26 @@
     state: present
     name: fzf
 
-- name: Install Oh My Zsh
+- name: Install Oh My Zsh # noqa: latest
   ansible.builtin.git:
     repo: https://github.com/ohmyzsh/ohmyzsh.git
     dest: ~/.oh-my-zsh
     depth: 1
 
-- name: Install zsh-autosuggestions plugin
-  git:
+- name: Install zsh-autosuggestions plugin # noqa: latest
+  ansible.builtin.git:
     repo: https://github.com/zsh-users/zsh-autosuggestions
     dest: ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
     depth: 1
 
-- name: Install zsh-completions plugin
-  git:
+- name: Install zsh-completions plugin # noqa: latest
+  ansible.builtin.git:
     repo: https://github.com/zsh-users/zsh-completions
     dest: ~/.oh-my-zsh/custom/plugins/zsh-completions
     depth: 1
 
-- name: Install zsh-syntax-highlighting plugin
-  git:
+- name: Install zsh-syntax-highlighting plugin # noqa: latest
+  ansible.builtin.git:
     repo: https://github.com/zsh-users/zsh-syntax-highlighting.git
     dest: ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
     depth: 1
@@ -62,8 +62,8 @@
 
 - name: Tasks for starship
   ansible.builtin.include_tasks: starship.yml
-  when: with_starship == true
+  when: with_starship
 
 - name: Tasks for p10k
   ansible.builtin.include_tasks: p10k.yml
-  when: with_starship != true
+  when: not with_starship

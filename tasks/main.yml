@@ -28,6 +28,12 @@
     state: present
     name: "{{ powerlinefonts }}"
 
+- name: Install exa
+  become: true
+  ansible.builtin.package:
+    state: present
+    name: exa
+
 - name: Install fd-find
   become: true
   ansible.builtin.package:

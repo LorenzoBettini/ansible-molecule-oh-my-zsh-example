@@ -8,8 +8,8 @@ lint: |
   yamllint .
   ansible-lint
 platforms:
-  - name: instance-arch
-    image: archlinux:latest
+  - name: instance-ubuntu
+    image: ubuntu:kinetic
     pre_build_image: true
 provisioner:
   name: ansible

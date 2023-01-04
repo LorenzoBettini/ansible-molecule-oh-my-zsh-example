@@ -35,6 +35,13 @@
       bat --version
     changed_when: false
 
+  # In Ubuntu/Fedora we have to install it from archive
+  # so it's better to check that
+  - name: Assert dust can be found
+    ansible.builtin.shell: >
+      dust --version
+    changed_when: false
+
   - name: Get current user's home
     ansible.builtin.shell: >
       set -o pipefail && \

@@ -98,6 +98,9 @@ alias la='exa -al --color=always --group-directories-first'  # all files and dir
 alias ll='exa -l --color=always --group-directories-first'  # long format
 alias lt='exa -aT --color=always --group-directories-first' # tree listing
 
+# Aliases with fzf
+alias fzfp="fzf --preview 'bat --style=numbers --color=always --line-range :500 {}'"
+
 # User configuration
 
 # Make sure $HOME/.local/bin is in the PATH

@@ -32,6 +32,13 @@
       fd --version
     changed_when: false
 
+  # In Ubuntu we have to create a link to "bat", because
+  # the command is "batcat", so it's better to check that
+  - name: Assert bat can be found
+    ansible.builtin.shell: >
+      bat --version
+    changed_when: false
+
   - name: Get current user's home
     ansible.builtin.shell: >
       set -o pipefail && \

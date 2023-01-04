@@ -35,6 +35,23 @@
     name: dust
   when: ansible_os_family == 'Archlinux'
 
+- name: Get latest version of dust on Ubuntu/Fedora
+  ansible.builtin.uri:
+    url: https://api.github.com/repos/bootandy/dust/releases/latest
+    method: GET
+    return_content: true
+    body_format: json
+  register: dustdata
+  when: ansible_os_family != 'Archlinux'
+
+- name: Install dust on Ubuntu/Fedora
+  become: true
+  ansible.builtin.unarchive:
+    src: "https://github.com/bootandy/dust/releases/latest/download/dust-{{dustdata.json.tag_name}}-x86_64-unknown-linux-gnu.tar.gz"
+    dest: /usr/local/bin
+    remote_src: yes
+  when: ansible_os_family != 'Archlinux'
+
 - name: Install exa
   become: true
   ansible.builtin.package:

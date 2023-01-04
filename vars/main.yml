@@ -1,4 +1,5 @@
 ---
 # vars file for oh_my_zsh
 powerlinefonts: powerline-fonts
+fdfind: fd-find
 with_starship: true

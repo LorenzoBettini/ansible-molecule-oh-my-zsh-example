@@ -88,10 +88,10 @@ plugins=(
 source $ZSH/oh-my-zsh.sh
 
 # Aliases with exa
-alias l='exa -lah --color=always --group-directories-first' # with headers
-alias la='exa -al --color=always --group-directories-first'  # all files and dirs
-alias ll='exa -l --color=always --group-directories-first'  # long format
-alias lt='exa -aT --color=always --group-directories-first' # tree listing
+alias l='exa -lah --color=always --group-directories-first --icons' # with headers
+alias la='exa -al --color=always --group-directories-first --icons'  # all files and dirs
+alias ll='exa -l --color=always --group-directories-first --icons'  # long format
+alias lt='exa -aT --color=always --group-directories-first --icons' # tree listing
 
 # Aliases with fzf: with preview
 alias fzp="fzf --preview 'bat --style=numbers --color=always --line-range :500 {}'"

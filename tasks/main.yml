@@ -41,6 +41,21 @@
     name: procs
   when: ansible_os_family != 'Debian'
 
+# unzip is useful for extracting zips
+- name: Install unzip
+  become: true
+  ansible.builtin.package:
+    state: present
+    name: unzip
+
+- name: Install procs in Ubuntu
+  become: true
+  ansible.builtin.unarchive:
+    src: "https://github.com/dalance/procs/releases/download/v0.13.3/procs-v0.13.3-x86_64-linux.zip"
+    dest: /usr/local/bin
+    remote_src: true
+  when: ansible_os_family == 'Debian'
+
 - name: Install dust on Arch
   become: true
   ansible.builtin.package:

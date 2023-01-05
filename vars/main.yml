@@ -3,4 +3,5 @@
 powerlinefonts: powerline-fonts
 fdfind: fd-find
 dustversion: v0.8.3
+procsversion: v0.13.3
 with_starship: true

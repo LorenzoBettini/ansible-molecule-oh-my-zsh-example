@@ -28,6 +28,12 @@
     state: present
     name: "{{ powerlinefonts }}"
 
+- name: Install ripgrep
+  become: true
+  ansible.builtin.package:
+    state: present
+    name: ripgrep
+
 - name: Install dust on Arch
   become: true
   ansible.builtin.package:

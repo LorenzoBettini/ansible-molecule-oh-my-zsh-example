@@ -34,6 +34,13 @@
     state: present
     name: ripgrep
 
+- name: Install procs in Arch/Fedora
+  become: true
+  ansible.builtin.package:
+    state: present
+    name: procs
+  when: ansible_os_family != 'Debian'
+
 - name: Install dust on Arch
   become: true
   ansible.builtin.package:

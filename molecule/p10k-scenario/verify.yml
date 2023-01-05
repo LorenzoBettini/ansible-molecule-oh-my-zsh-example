@@ -46,6 +46,13 @@
       dust --version
     changed_when: false
 
+  # In Ubuntu we have to install it from archive
+  # so it's better to check that
+  - name: Assert procs can be found
+    ansible.builtin.shell: >
+      procs --version
+    changed_when: false
+
   - name: Get current user's home
     ansible.builtin.shell: >
       set -o pipefail && \

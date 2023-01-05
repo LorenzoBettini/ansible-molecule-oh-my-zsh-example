@@ -49,7 +49,8 @@
   when: ansible_os_family == 'Archlinux'
 
 # We soon hit the "API rate limit exceeded" error on GitHub Actions
-# so we cannot use {{ dustdata.json.tag_name }} in the next task
+# so we cannot use {{ dustdata.json.tag_name }} in the next task's URL
+# https://github.com/bootandy/dust/releases/latest/download/dust-{{ dustdata.json.tag_name }}-x86_64-unknown-linux-gnu.tar.gz
 # we'll have to stick with a fixed version
 
 # - name: Get latest version of dust on Ubuntu/Fedora
@@ -64,7 +65,7 @@
 - name: Install dust on Ubuntu/Fedora
   become: true
   ansible.builtin.unarchive:
-    src: "https://github.com/bootandy/dust/releases/latest/download/dust-v0.8.3-x86_64-unknown-linux-gnu.tar.gz"
+    src: "https://github.com/bootandy/dust/releases/download/{{ dustversion }}/dust-{{ dustversion }}-x86_64-unknown-linux-gnu.tar.gz"
     dest: /usr/local/bin
     extra_opts:
     - --strip=1

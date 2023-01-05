@@ -34,6 +34,28 @@
     state: present
     name: ripgrep
 
+- name: Install procs in Arch/Fedora
+  become: true
+  ansible.builtin.package:
+    state: present
+    name: procs
+  when: ansible_os_family != 'Debian'
+
+# unzip is useful for extracting zips
+- name: Install unzip
+  become: true
+  ansible.builtin.package:
+    state: present
+    name: unzip
+
+- name: Install procs in Ubuntu
+  become: true
+  ansible.builtin.unarchive:
+    src: "https://github.com/dalance/procs/releases/download/{{ procsversion }}/procs-{{ procsversion }}-x86_64-linux.zip"
+    dest: /usr/local/bin
+    remote_src: true
+  when: ansible_os_family == 'Debian'
+
 - name: Install dust on Arch
   become: true
   ansible.builtin.package:

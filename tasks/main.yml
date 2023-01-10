@@ -89,6 +89,14 @@
     remote_src: true
   when: ansible_os_family != 'Archlinux'
 
+# To get "icons" in exa output
+- name: Install Patched font Arimo from nerd-fonts (Arch)
+  become: true
+  ansible.builtin.package:
+    state: present
+    name: ttf-arimo-nerd
+  when: ansible_os_family == 'Archlinux'
+
 - name: Install exa
   become: true
   ansible.builtin.package:

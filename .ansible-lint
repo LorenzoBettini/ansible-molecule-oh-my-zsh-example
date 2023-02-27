@@ -1,0 +1,3 @@
+# to avoid "role-name[path]: Avoid using paths when importing roles. (../..)"
+exclude_paths:
+  - tests/

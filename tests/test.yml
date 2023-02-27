@@ -1,4 +1,5 @@
 ---
-- hosts: localhost
+- name: Test the role locally
+  hosts: localhost
   roles:
     - ../../

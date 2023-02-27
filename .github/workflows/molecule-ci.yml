@@ -11,6 +11,8 @@ on:  # yamllint disable-line rule:truthy
       - '**.md'
       - '.gitpod.Dockerfile'
       - '.gitpod.yml'
+  schedule:
+    - cron: "0 7 * * 0"
 
 jobs:
 

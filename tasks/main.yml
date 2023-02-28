@@ -77,6 +77,16 @@
 #   register: dustdata
 #   when: ansible_os_family != 'Archlinux'
 
+# In Ubuntu/Fedora we have to install it from archive
+# so it's better to check if it's already installed
+- name: Check if dust is already installed on Ubuntu/Fedora
+  ansible.builtin.shell: >
+    dust --version
+  register: dust_rc
+  failed_when: false
+  changed_when: false
+  when: ansible_os_family != 'Archlinux'
+
 - name: Install dust on Ubuntu/Fedora
   become: true
   ansible.builtin.unarchive:
@@ -87,7 +97,7 @@
     - --wildcards
     - '*/dust'
     remote_src: true
-  when: ansible_os_family != 'Archlinux'
+  when: ansible_os_family != 'Archlinux' and dust_rc.rc != 0
 
 # To get "icons" in exa output
 - name: Install Patched font Arimo from nerd-fonts (Arch)

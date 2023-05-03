@@ -9,7 +9,7 @@ lint: |
   ansible-lint
 platforms:
   - name: instance-ubuntu
-    image: ubuntu:kinetic
+    image: ubuntu:lunar
     pre_build_image: true
 provisioner:
   name: ansible

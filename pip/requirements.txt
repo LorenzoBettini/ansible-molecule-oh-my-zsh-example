@@ -1,5 +1,6 @@
 ansible
 molecule
 molecule-plugins[docker]
+ansible-compat<4; python_version >= '3.6' # https://github.com/ansible-community/molecule/issues/3903
 yamllint
 ansible-lint

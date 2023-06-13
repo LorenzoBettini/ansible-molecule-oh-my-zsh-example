@@ -21,11 +21,23 @@ A list of other roles hosted on Galaxy should go here, plus any details in regar
 Example Playbook
 ----------------
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+For `starship` (default):
 
-    - hosts: servers
-      roles:
-         - { role: username.rolename, x: 42 }
+```yaml
+    - name: Install Oh My Zsh
+      ansible.builtin.include_role:
+        name: lorenzobettini.oh_my_zsh
+```
+
+For `p10k`:
+
+```yaml
+    - name: Install Oh My Zsh
+      ansible.builtin.include_role:
+        name: lorenzobettini.oh_my_zsh
+      vars:
+        with_starship: false
+```
 
 License
 -------
@@ -47,10 +59,16 @@ To run a different scenario:
 molecule converge --scenario-name='p10k-scenario'
 ```
 
-To run the playbook on this system:
+To run the playbook on this system for `starship` (default):
 
 ```
 ansible-playbook tests/test.yml -i tests/inventory -K
+```
+
+To run the playbook on this system for `p10k`:
+
+```
+ansible-playbook tests/test.yml -i tests/inventory -K --extra-vars '{"with_starship":false}'
 ```
 
 Author Information

@@ -99,6 +99,13 @@
     remote_src: true
   when: ansible_os_family != 'Archlinux' and dust_rc.rc != 0
 
+- name: Install Google Noto emoji fonts
+  become: true
+  ansible.builtin.package:
+    state: present
+    name: noto-fonts-emoji
+  when: ansible_os_family == 'Archlinux'
+
 # To get "icons" in exa output
 - name: Install Patched font Arimo from nerd-fonts (Arch)
   become: true

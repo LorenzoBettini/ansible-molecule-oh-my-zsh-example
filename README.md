@@ -1,22 +1,15 @@
 Role Name
 =========
 
-A brief description of the role goes here.
+My Ansible role for installing "Oh My Zsh", some of its plug-ins, and other command line tools. It can also install and configure the "starship" prompt or the "p10k" theme.
 
-Requirements
-------------
-
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+DISCLAIMER: this role is built to fit my needs and configurations, and it is not meant to be reusable.
 
 Role Variables
 --------------
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
-
-Dependencies
-------------
-
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+By default, it installs the "starship" prompt.
+To install, instead, the "p10k" theme, pass the variable `with_starship: false`.
 
 Example Playbook
 ----------------
@@ -38,11 +31,6 @@ For `p10k`:
       vars:
         with_starship: false
 ```
-
-License
--------
-
-BSD
 
 Notes
 -------
@@ -70,8 +58,3 @@ To run the playbook on this system for `p10k`:
 ```
 ansible-playbook tests/test.yml -i tests/inventory -K --extra-vars '{"with_starship":false}'
 ```
-
-Author Information
-------------------
-
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).

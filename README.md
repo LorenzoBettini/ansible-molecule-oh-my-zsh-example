@@ -5,6 +5,8 @@ My Ansible role for installing "Oh My Zsh", some of its plug-ins, and other comm
 
 DISCLAIMER: this role is built to fit my needs and configurations, and it is not meant to be reusable.
 
+This role is described in this blog post: https://www.lorenzobettini.it/2023/07/my-ansible-role-for-oh-my-zsh-and-other-cli-programs/
+
 Role Variables
 --------------
 

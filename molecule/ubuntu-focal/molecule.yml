@@ -1,0 +1,18 @@
+---
+dependency:
+  name: galaxy
+driver:
+  name: docker
+lint: |
+  set -e
+  yamllint .
+  ansible-lint
+platforms:
+  - name: instance-ubuntu-focal
+    image: ubuntu:focal
+    pre_build_image: true
+provisioner:
+  name: ansible
+  playbooks:
+    converge: ../shared/converge.yml
+    verify: ../shared/verify.yml

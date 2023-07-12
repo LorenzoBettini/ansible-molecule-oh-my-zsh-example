@@ -167,11 +167,30 @@
     state: link
   when: ansible_os_family == 'Debian' and ansible_distribution_version is version('23.04', '<')
 
-- name: Install zoxide
+# In Ubuntu Focal we have to install it from archive
+# so it's better to check if it's already installed
+- name: Check if zoxide is already installed on Ubuntu Focal
+  ansible.builtin.shell: >
+    zoxide --version
+  register: zoxide_rc
+  failed_when: false
+  changed_when: false
+  when: ansible_os_family == 'Debian' and ansible_distribution_version is version('20.10', '<')
+
+- name: Install zoxide on Ubuntu Focal
+  become: true
+  ansible.builtin.unarchive:
+    src: "https://github.com/ajeetdsouza/zoxide/releases/download/v{{ zoxideversion }}/zoxide-{{ zoxideversion }}-x86_64-unknown-linux-musl.tar.gz"
+    dest: /usr/local/bin
+    remote_src: true
+  when: ansible_os_family == 'Debian' and ansible_distribution_version is version('20.10', '<') and zoxide_rc.rc != 0
+
+- name: Install zoxide through package manager
   become: true
   ansible.builtin.package:
     state: present
     name: zoxide
+  when: ansible_os_family != 'Debian' or ansible_distribution_version is version('20.10', '>=')
 
 # required by the OMZ plugin zsh-interactive-cd
 - name: Install fzf (command-line fuzzy finder)

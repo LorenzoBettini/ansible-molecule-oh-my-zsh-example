@@ -114,11 +114,30 @@
     name: ttf-arimo-nerd
   when: ansible_os_family == 'Archlinux'
 
-- name: Install exa
+# In Ubuntu Focal we have to install it from archive
+# so it's better to check if it's already installed
+- name: Check if exa is already installed on Ubuntu Focal
+  ansible.builtin.shell: >
+    exa --version
+  register: exa_rc
+  failed_when: false
+  changed_when: false
+  when: ansible_os_family == 'Debian' and ansible_distribution_version is version('20.10', '<')
+
+- name: Install exa on Ubuntu Focal
+  become: true
+  ansible.builtin.unarchive:
+    src: "https://github.com/ogham/exa/releases/download/{{ exaversion }}/exa-linux-x86_64-musl-{{ exaversion }}.zip"
+    dest: /usr/local/bin
+    remote_src: true
+  when: ansible_os_family == 'Debian' and ansible_distribution_version is version('20.10', '<') and exa_rc.rc != 0
+
+- name: Install exa through package manager
   become: true
   ansible.builtin.package:
     state: present
     name: exa
+  when: ansible_os_family != 'Debian' or ansible_distribution_version is version('20.10', '>=')
 
 - name: Install fd-find
   become: true

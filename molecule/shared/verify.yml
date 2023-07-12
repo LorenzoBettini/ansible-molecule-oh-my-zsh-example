@@ -48,6 +48,20 @@
     ansible.builtin.shell: >
       procs --version
     changed_when: false
+  
+  # In Ubuntu Focal we have to install it from archive
+  # so it's better to check that
+  - name: Assert exa can be found
+    ansible.builtin.shell: >
+      exa --version
+    changed_when: false
+
+  # In Ubuntu Focal we have to install it from archive
+  # so it's better to check that
+  - name: Assert zoxide can be found
+    ansible.builtin.shell: >
+      zoxide --version
+    changed_when: false
 
   - name: Get current user's home
     ansible.builtin.shell: >

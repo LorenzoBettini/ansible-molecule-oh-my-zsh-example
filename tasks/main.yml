@@ -128,7 +128,7 @@
   become: true
   ansible.builtin.unarchive:
     src: "https://github.com/ogham/exa/releases/download/{{ exaversion }}/exa-linux-x86_64-musl-{{ exaversion }}.zip"
-    dest: /usr/local/bin
+    dest: /usr/local
     remote_src: true
   when: ansible_os_family == 'Debian' and ansible_distribution_version is version('20.10', '<') and exa_rc.rc != 0
 

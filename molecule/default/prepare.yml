@@ -4,5 +4,6 @@
   gather_facts: false
   tasks:
     - name: Install python in Arch
-      ansible.builtin.raw: pacman -Sy --noconfirm --needed python sudo
+      # -u is crucial to avoid partial updates and inconsistent libraries
+      ansible.builtin.raw: pacman -Syu --noconfirm --needed python sudo
       changed_when: false

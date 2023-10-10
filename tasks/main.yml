@@ -223,6 +223,12 @@
     dest: ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
     depth: 1
 
+- name: Install autoupdate-zsh-plugin # noqa: latest
+  ansible.builtin.git:
+    repo: https://github.com/TamCore/autoupdate-oh-my-zsh-plugins
+    dest: ~/.oh-my-zsh/custom/plugins/autoupdate
+    depth: 1
+
 - name: Change user shell to zsh 
   become: true
   ansible.builtin.user:

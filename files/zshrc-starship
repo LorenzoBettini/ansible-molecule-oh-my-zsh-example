@@ -83,6 +83,7 @@ plugins=(
     zsh-navigation-tools
     fzf
     zoxide
+    autoupdate
 )
 
 source $ZSH/oh-my-zsh.sh

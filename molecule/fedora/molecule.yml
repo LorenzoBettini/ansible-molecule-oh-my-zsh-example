@@ -9,7 +9,7 @@ lint: |
   ansible-lint
 platforms:
   - name: instance-fedora
-    image: fedora:37
+    image: fedora:39
     pre_build_image: true
 provisioner:
   name: ansible

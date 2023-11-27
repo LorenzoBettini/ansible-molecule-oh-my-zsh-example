@@ -114,13 +114,15 @@
     name: ttf-arimo-nerd
   when: ansible_os_family == 'Archlinux'
 
-- name: Install GPG and Wget
+# Required for the Ubuntu repository (see below)
+- name: Install GPG and Wget in Ubuntu
   become: true
   ansible.builtin.package:
     state: present
     name:
     - gpg
     - wget
+  when: ansible_os_family == 'Debian'
 
 # In Ubuntu we have to install it from another repository
 # so it's better to check if it's already installed

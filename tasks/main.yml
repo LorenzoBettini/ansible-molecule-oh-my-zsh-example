@@ -106,7 +106,7 @@
     name: noto-fonts-emoji
   when: ansible_os_family == 'Archlinux'
 
-# To get "icons" in exa output
+# To get "icons" in ezaoutput
 - name: Install Patched font Arimo from nerd-fonts (Arch)
   become: true
   ansible.builtin.package:
@@ -114,30 +114,39 @@
     name: ttf-arimo-nerd
   when: ansible_os_family == 'Archlinux'
 
-# In Ubuntu Focal we have to install it from archive
-# so it's better to check if it's already installed
-- name: Check if exa is already installed on Ubuntu Focal
-  ansible.builtin.shell: >
-    exa --version
-  register: exa_rc
-  failed_when: false
-  changed_when: false
-  when: ansible_os_family == 'Debian' and ansible_distribution_version is version('20.10', '<')
-
-- name: Install exa on Ubuntu Focal
-  become: true
-  ansible.builtin.unarchive:
-    src: "https://github.com/ogham/exa/releases/download/{{ exaversion }}/exa-linux-x86_64-musl-{{ exaversion }}.zip"
-    dest: /usr/local
-    remote_src: true
-  when: ansible_os_family == 'Debian' and ansible_distribution_version is version('20.10', '<') and exa_rc.rc != 0
-
-- name: Install exa through package manager
+- name: Install GPG and Wget
   become: true
   ansible.builtin.package:
     state: present
-    name: exa
-  when: ansible_os_family != 'Debian' or ansible_distribution_version is version('20.10', '>=')
+    name:
+    - gpg
+    - wget
+
+# In Ubuntu we have to install it from another repository
+# so it's better to check if it's already installed
+- name: Check if eza is already installed on Ubuntu
+  ansible.builtin.shell: >
+    eza --version
+  register: eza_rc
+  failed_when: false
+  changed_when: false
+  when: ansible_os_family == 'Debian'
+
+- name: Repository for eza on Ubuntu
+  become: true
+  ansible.builtin.shell: |
+    mkdir -p /etc/apt/keyrings
+    wget -qO- https://raw.githubusercontent.com/eza-community/eza/main/deb.asc | gpg --dearmor -o /etc/apt/keyrings/gierens.gpg
+    echo "deb [signed-by=/etc/apt/keyrings/gierens.gpg] http://deb.gierens.de stable main" | tee /etc/apt/sources.list.d/gierens.list
+    chmod 644 /etc/apt/keyrings/gierens.gpg /etc/apt/sources.list.d/gierens.list
+    apt update
+  when: ansible_os_family == 'Debian' and eza_rc.rc != 0
+
+- name: Install eza through package manager
+  become: true
+  ansible.builtin.package:
+    state: present
+    name: eza
 
 - name: Install fd-find
   become: true

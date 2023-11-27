@@ -49,7 +49,7 @@
       procs --version
     changed_when: false
   
-  # In Ubuntu Focal we have to install it from a repository
+  # In Ubuntu we have to install it from a repository
   # so it's better to check that
   - name: Assert eza can be found
     ansible.builtin.shell: >

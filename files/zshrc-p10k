@@ -110,6 +110,14 @@ export PATH=$HOME/.local/bin:$PATH
 
 export _JAVA_OPTIONS=-Djava.net.preferIPv4Stack=true
 
+# For Homebrew, if installed
+export HOMEBREW_PREFIX="/home/linuxbrew/.linuxbrew";
+export HOMEBREW_CELLAR="/home/linuxbrew/.linuxbrew/Cellar";
+export HOMEBREW_REPOSITORY="/home/linuxbrew/.linuxbrew/Homebrew";
+export PATH="/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin${PATH+:$PATH}";
+export MANPATH="/home/linuxbrew/.linuxbrew/share/man${MANPATH+:$MANPATH}:";
+export INFOPATH="/home/linuxbrew/.linuxbrew/share/info:${INFOPATH:-}";
+
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment

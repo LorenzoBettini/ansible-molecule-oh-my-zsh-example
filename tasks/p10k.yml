@@ -11,9 +11,11 @@
     src: zshrc-p10k
     dest: ~/.zshrc
     mode: 0644
+  when: copy_dot_files
 
 - name: Copy p10k.zsh
   ansible.builtin.copy:
     src: p10k.zsh
     dest: ~/.p10k.zsh
     mode: 0644
+  when: copy_dot_files

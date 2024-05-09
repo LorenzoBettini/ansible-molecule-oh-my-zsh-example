@@ -7,3 +7,4 @@ exaversion: v0.10.1
 zoxideversion: 0.9.1
 procsversion: v0.13.3
 with_starship: true
+copy_dot_files: true

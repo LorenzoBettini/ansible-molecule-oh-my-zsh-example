@@ -13,6 +13,9 @@ Role Variables
 By default, it installs the "starship" prompt.
 To install, instead, the "p10k" theme, pass the variable `with_starship: false`.
 
+By default, it also copies the dot files (i.e., `.zshrc` and `.p10k` for "p10k").
+To disable that, pass the variable `copy_dot_files: false`.
+
 Example Playbook
 ----------------
 
@@ -32,6 +35,7 @@ For `p10k`:
         name: lorenzobettini.oh_my_zsh
       vars:
         with_starship: false
+        copy_dot_files: false
 ```
 
 Notes

@@ -37,3 +37,4 @@
     src: zshrc-starship
     dest: ~/.zshrc
     mode: 0644
+  when: copy_dot_files

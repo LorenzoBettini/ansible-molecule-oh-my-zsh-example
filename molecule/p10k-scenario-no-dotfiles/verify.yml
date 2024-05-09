@@ -1,0 +1,95 @@
+---
+# This is an example playbook to execute Ansible tests.
+
+- name: Verify
+  hosts: all
+  gather_facts: true
+  tasks:
+  - name: Get current user's shell
+    ansible.builtin.shell: >
+      set -o pipefail && \
+      grep -E "^{{ ansible_user_id }}:" /etc/passwd | awk -F: '{ print $7 }'
+    register: user_shell
+    args:
+      executable: /bin/bash
+    changed_when: false
+
+  - name: Assert shell is zsh
+    ansible.builtin.assert:
+      that: "user_shell.stdout == '/bin/zsh'"
+
+  - name: Assert starship is NOT installed in this scenario
+    ansible.builtin.shell: >
+      starship --version
+    register: starship_cmd
+    failed_when: starship_cmd.rc == 0
+    changed_when: false
+
+  # In Ubuntu we have to create a link to "fd", because
+  # the command is "fdfind", so it's better to check that
+  - name: Assert fd can be found
+    ansible.builtin.shell: >
+      fd --version
+    changed_when: false
+
+  # In Ubuntu we have to create a link to "bat", because
+  # the command is "batcat", so it's better to check that
+  - name: Assert bat can be found
+    ansible.builtin.shell: >
+      bat --version
+    changed_when: false
+
+  # In Ubuntu/Fedora we have to install it from archive
+  # so it's better to check that
+  - name: Assert dust can be found
+    ansible.builtin.shell: >
+      dust --version
+    changed_when: false
+
+  # In Ubuntu we have to install it from archive
+  # so it's better to check that
+  - name: Assert procs can be found
+    ansible.builtin.shell: >
+      procs --version
+    changed_when: false
+
+  # In Ubuntu we have to install it from a repository
+  # so it's better to check that
+  - name: Assert eza can be found
+    ansible.builtin.shell: >
+      eza --version
+    changed_when: false
+
+  # In Ubuntu Focal we have to install it from archive
+  # so it's better to check that
+  - name: Assert zoxide can be found
+    ansible.builtin.shell: >
+      zoxide --version
+    changed_when: false
+
+  - name: Get current user's home
+    ansible.builtin.shell: >
+      set -o pipefail && \
+      grep -E "^{{ ansible_user_id }}:" /etc/passwd | awk -F: '{ print $6 }'
+    register: user_home
+    args:
+      executable: /bin/bash
+    changed_when: false
+
+  - name: Check if ~/.p10k.zsh is present
+    ansible.builtin.stat:
+      path: "{{ user_home.stdout }}/.p10k.zsh"
+    register: result
+
+  - name: Assert ~/.p10k.zsh is NOT present in this scenario
+    ansible.builtin.assert:
+      that: "not result.stat.exists"
+
+  - name: Check if ~/.zshrc is present
+    ansible.builtin.stat:
+      path: "{{ user_home.stdout }}/.zshrc"
+    register: result
+
+  - name: Assert ~/.zshrc is NOT present in this scenario
+    ansible.builtin.assert:
+      that: "not result.stat.exists"

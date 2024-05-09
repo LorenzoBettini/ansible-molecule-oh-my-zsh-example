@@ -28,6 +28,7 @@ jobs:
           - ubuntu
           - ubuntu-focal
           - p10k-scenario
+          - p10k-scenario-no-dotfiles
 
     steps:
       - name: Check out the codebase.

@@ -26,7 +26,6 @@ jobs:
           - default # arch
           - fedora
           - ubuntu
-          - ubuntu-focal
           - p10k-scenario
           - p10k-scenario-no-dotfiles
 

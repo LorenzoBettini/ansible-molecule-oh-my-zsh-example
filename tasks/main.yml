@@ -1,5 +1,10 @@
 ---
 # tasks file for oh_my_zsh
+- name: Select Pacman backend on Arch Linux
+  ansible.builtin.set_fact:
+    ansible_package_use: community.general.pacman
+  when: ansible_os_family == 'Archlinux'
+
 - name: Install Git
   become: true
   ansible.builtin.package:
@@ -34,12 +39,12 @@
     state: present
     name: ripgrep
 
-- name: Install procs in Arch/Fedora
+- name: Install procs in Arch
   become: true
   ansible.builtin.package:
     state: present
     name: procs
-  when: ansible_os_family != 'Debian'
+  when: ansible_os_family == 'Archlinux'
 
 # unzip is useful for extracting zips
 - name: Install unzip
@@ -48,13 +53,13 @@
     state: present
     name: unzip
 
-- name: Install procs in Ubuntu
+- name: Install procs from archive on Fedora/Ubuntu
   become: true
   ansible.builtin.unarchive:
     src: "https://github.com/dalance/procs/releases/download/{{ procsversion }}/procs-{{ procsversion }}-x86_64-linux.zip"
     dest: /usr/local/bin
     remote_src: true
-  when: ansible_os_family == 'Debian'
+  when: ansible_os_family == 'Debian' or ansible_os_family == 'RedHat'
 
 - name: Install dust on Arch
   become: true

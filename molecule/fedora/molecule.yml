@@ -9,10 +9,11 @@ lint: |
   ansible-lint
 platforms:
   - name: instance-fedora
-    image: fedora:40
+    image: fedora:45
     pre_build_image: true
 provisioner:
   name: ansible
   playbooks:
+    prepare: ../fedora/prepare.yml
     converge: ../shared/converge.yml
     verify: ../shared/verify.yml

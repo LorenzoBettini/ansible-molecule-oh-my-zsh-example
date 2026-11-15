@@ -14,5 +14,6 @@ platforms:
 provisioner:
   name: ansible
   playbooks:
+    prepare: ../fedora/prepare.yml
     converge: ../shared/converge.yml
     verify: ../shared/verify.yml

@@ -1,0 +1,8 @@
+---
+- name: Prepare
+  hosts: all
+  gather_facts: false
+  tasks:
+    - name: Install python in Fedora
+      ansible.builtin.raw: dnf install -y python3 sudo
+      changed_when: false

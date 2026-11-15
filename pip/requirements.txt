@@ -1,4 +1,4 @@
-ansible
+ansible-core~=2.22.0
 molecule
 molecule-plugins[docker]
 yamllint

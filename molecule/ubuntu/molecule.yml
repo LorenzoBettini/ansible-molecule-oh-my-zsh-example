@@ -9,7 +9,7 @@ lint: |
   ansible-lint
 platforms:
   - name: instance-ubuntu
-    image: ubuntu:24.04
+    image: ubuntu:26.04
     pre_build_image: true
 provisioner:
   name: ansible
